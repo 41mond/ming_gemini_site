@@ -12,7 +12,7 @@ sendButton.addEventListener('click', async () => {
     }
 
     sendButton.disabled = true;
-    resultOutput.innerText = 'Gemini 正在思考中...';
+    resultOutput.innerText = '正在分析中...';
 
     try {
         // 向我们自己的后端服务器发送请求
