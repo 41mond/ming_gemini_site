@@ -4,7 +4,7 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 居中所有内容 */
+    align-items: center;
     padding: 20px;
 }
 
@@ -23,25 +23,25 @@ textarea, button {
 }
 
 button {
-    background-color: #4285F4; /* 谷歌蓝 */
+    background-color: #f44242; /* 昨夜朱楼梦 */
     color: white;
-    cursor: pointer; /* 鼠标放上去变小手 */
+    cursor: pointer;
     border: none;
     font-weight: bold;
 }
 
 button:hover {
-    background-color: #357ae8;
+    background-color: #e83535; /* 今宵水国吟 */
 }
 
 #result-output {
     width: 80%;
     max-width: 500px;
     min-height: 100px;
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: #FAF9DE;
+    border: 1px solid #b69b00;
     border-radius: 8px;
     padding: 15px;
-    white-space: pre-wrap; /* 保持换行和空格 */
+    white-space: pre-wrap; 
     line-height: 1.6;
 }
