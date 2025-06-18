@@ -1,19 +1,19 @@
 const express = require('express');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config(); // 加载 .env 文件中的环境变量
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+// 注意：在Vercel上，端口由环境自动管理，我们不需要自己指定
+// const port = process.env.PORT || 3000; 
 
-// 初始化 Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // 使用你确认可用的模型名称
 
 // Middlewares
-app.use(express.static('public')); // 告诉 Express 去哪里找前端文件 (html, css, js)
-app.use(express.json());       // 让 Express 能够解析 JSON 格式的请求体
+app.use(express.static('public'));
+app.use(express.json());
 
-// 创建一个 API 端点来处理来自前端的请求
+// API 端点 (这部分不需要修改)
 app.post('/api/gemini', async (req, res) => {
     try {
         const prompt = req.body.prompt;
@@ -25,7 +25,7 @@ app.post('/api/gemini', async (req, res) => {
         const response = await result.response;
         const text = response.text();
 
-        res.json({ text }); // 将结果以 JSON 格式返回给前端
+        res.json({ text });
 
     } catch (error) {
         console.error("Error calling Gemini API:", error);
@@ -33,8 +33,15 @@ app.post('/api/gemini', async (req, res) => {
     }
 });
 
+/*
+// 在 Vercel (无服务器环境) 中，我们不需要手动监听端口。
+// Vercel 会自动处理请求的传入和监听。
+// 因此，我们需要注释掉或者删除 app.listen() 这部分。
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+*/
 
-
+// 将 Express 应用实例导出，以便 Vercel 的运行时环境可以调用它。
+// 这是在 Vercel 上部署 Express 应用的关键！
+module.exports = app;
